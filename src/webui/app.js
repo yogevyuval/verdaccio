@@ -4,7 +4,7 @@ import 'element-theme-default';
 
 import storage from './utils/storage';
 import logo from './utils/logo';
-import { makeLogin, isTokenExpire } from './utils/login';
+import {makeLogin} from './utils/login';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -44,7 +44,7 @@ export default class App extends Component {
     const token = storage.getItem('token');
     const username = storage.getItem('username');
 
-    if (isTokenExpire(token) || isNil(username)) {
+    if (isNil(token) || isNil(username)) {
       this.handleLogout();
     } else {
       this.setState({

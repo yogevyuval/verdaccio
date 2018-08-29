@@ -12,7 +12,6 @@ import isEmpty from 'lodash/isEmpty';
 import debounce from 'lodash/debounce';
 
 import API from '../../utils/api';
-
 import PackageList from '../../components/PackageList';
 import Search from '../../components/Search';
 
@@ -20,7 +19,6 @@ import classes from "./home.scss";
 
 class Home extends Component {
   static propTypes = {
-    children: PropTypes.element,
     isUserLoggedIn: PropTypes.bool
   };
 
@@ -79,7 +77,11 @@ class Home extends Component {
     } catch (error) {
       this.handleShowAlertDialog({
         title: 'Warning',
-        message: `Unable to load package list: ${error.message}`
+        message: `Unable to load package list: ${error.error}`
+      });
+    } finally {
+      this.setState({
+        loading: false
       });
     }
   }
@@ -100,6 +102,10 @@ class Home extends Component {
       this.handleShowAlertDialog({
         title: 'Warning',
         message: 'Unable to get search result, please try again later.'
+      });
+    } finally {
+      this.setState({
+        loading: false
       });
     }
   }

@@ -4,13 +4,13 @@
  */
 
 import _ from 'lodash';
-import { ErrorCode, isObject, normalizeDistTags, DIST_TAGS, semverSort } from './utils';
+import {ErrorCode, isObject, normalizeDistTags, DIST_TAGS, semverSort} from './utils';
 import Search from './search';
-import { generateRandomHexString } from '../lib/crypto-utils';
+import {generateRandomHexString} from '../lib/crypto-utils';
 
-import type { Package, Version, Author } from '@verdaccio/types';
-import type { IStorage } from '../../types';
-import { API_ERROR, HTTP_STATUS } from './constants';
+import type {Package, Version, Author} from '@verdaccio/types';
+import type {IStorage} from '../../types';
+import {API_ERROR, HTTP_STATUS} from './constants';
 
 const pkgFileName = 'package.json';
 const fileExist: string = 'EEXISTS';
@@ -199,7 +199,7 @@ export function prepareSearchPackage(data: Package, time: mixed) {
     const pkg: any = {
       name: version.name,
       description: version.description,
-      [DIST_TAGS]: { latest },
+      [DIST_TAGS]: {latest},
       maintainers: version.maintainers || [version.author].filter(Boolean),
       author: version.author,
       repository: version.repository,
@@ -211,11 +211,11 @@ export function prepareSearchPackage(data: Package, time: mixed) {
       time: {
         modified: time,
       },
-      versions: { [latest]: 'latest' },
+      versions: {[latest]: 'latest'},
     };
 
     return pkg;
   }
 }
 
-export { generatePackageTemplate, normalizePackage, generateRevision, getLatestReadme, cleanUpReadme, fileExist, noSuchFile, pkgFileName };
+export {generatePackageTemplate, normalizePackage, generateRevision, getLatestReadme, cleanUpReadme, fileExist, noSuchFile, pkgFileName};

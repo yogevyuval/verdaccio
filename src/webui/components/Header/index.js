@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Button from '@material-ui/core/Button/index';
 import IconButton from '@material-ui/core/IconButton/index';
 import MenuItem from '@material-ui/core/MenuItem/index';
@@ -13,15 +13,16 @@ import Help from '@material-ui/icons/Help';
 import Tooltip from '@material-ui/core/Tooltip/index';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
-import { getRegistryURL } from '../../utils/url';
+import {getRegistryURL} from '../../utils/url';
 import Link from '../Link';
 import Logo from '../Logo';
+import Label from '../Label';
 import CopyToClipBoard from '../CopyToClipBoard/index';
 import RegistryInfoDialog from '../RegistryInfoDialog';
 
-import type { Node } from 'react';
-import { IProps, IState } from './interfaces';
-import { Wrapper, InnerWrapper } from './styles';
+import type {Node} from 'react';
+import {IProps, IState} from './interfaces';
+import {Wrapper, InnerWrapper, Greetings} from './styles';
 
 class Header extends Component<IProps, IState> {
   handleLoggedInMenu: Function;
@@ -109,7 +110,7 @@ class Header extends Component<IProps, IState> {
   }
 
   renderRightSide(): Node {
-    const { username = '' } = this.props;
+    const {username = ''} = this.props;
     const installationLink = 'https://verdaccio.org/docs/en/installation';
     return (
       <div>
@@ -138,8 +139,8 @@ class Header extends Component<IProps, IState> {
    * render popover menu
    */
   renderMenu(): Node {
-    const { handleLogout } = this.props;
-    const { anchorEl } = this.state;
+    const {handleLogout, username = ''} = this.props;
+    const {anchorEl} = this.state;
     const open = Boolean(anchorEl);
     return (
       <React.Fragment>
@@ -160,6 +161,10 @@ class Header extends Component<IProps, IState> {
           open={open}
           onClose={this.handleLoggedInMenuClose}
         >
+          <MenuItem disabled>
+            <Greetings>{`Hi,`}</Greetings>
+            <Label text={username} limit={140} weight="bold" capitalize />
+          </MenuItem>
           <MenuItem onClick={handleLogout} id="header--button-logout">
             Logout
           </MenuItem>
@@ -169,8 +174,8 @@ class Header extends Component<IProps, IState> {
   }
 
   renderInfoDialog(): Node {
-    const { scope } = this.props;
-    const { openInfoDialog, registryUrl } = this.state;
+    const {scope} = this.props;
+    const {openInfoDialog, registryUrl} = this.state;
     return (
       <RegistryInfoDialog open={openInfoDialog} onClose={this.handleCloseRegistryInfoDialog}>
         <div>

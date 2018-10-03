@@ -4,8 +4,8 @@ import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 
 import {asyncComponent} from './utils/asyncComponent';
 
-const DetailPackage = asyncComponent(() => import('./modules/detail'));
-const HomePage = asyncComponent(() => import('./modules/home'));
+const DetailPackage = asyncComponent(() => import('./pages/detail'));
+const HomePage = asyncComponent(() => import('./pages/home'));
 
 class RouterApp extends Component {
   static propTypes = {

@@ -31,8 +31,7 @@ class Home extends Component {
       message: ''
     },
     loading: true,
-    fistTime: true,
-    query: ''
+    fistTime: true
   };
 
   constructor(props) {
@@ -43,64 +42,15 @@ class Home extends Component {
     this.searchPackage = debounce(this.searchPackage, 800);
   }
 
-  componentDidMount() {
-    this.loadPackages();
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (prevState.query !== this.state.query) {
       if (this.req && this.req.abort) this.req.abort();
       this.setState({
         loading: true
       });
-
-      if (prevState.query !== '' && this.state.query === '') {
-        this.loadPackages();
-      } else {
-        this.searchPackage(this.state.query);
-      }
     }
-
     if (prevProps.isUserLoggedIn !== this.props.isUserLoggedIn) {
       this.loadPackages();
-    }
-  }
-
-  async loadPackages() {
-    try {
-      this.req = await API.request('packages', 'GET');
-
-      if (this.state.query === '') {
-        this.setState({
-          packages: this.req,
-          loading: false
-        });
-      }
-    } catch (error) {
-      this.handleShowAlertDialog({
-        title: 'Warning',
-        message: `Unable to load package list: ${error.error}`
-      });
-    }
-  }
-
-  async searchPackage(query) {
-    try {
-      this.req = await API.request(`/search/${query}`, 'GET');
-
-      // Implement cancel feature later
-      if (this.state.query === query) {
-        this.setState({
-          packages: this.req,
-          fistTime: false,
-          loading: false
-        });
-      }
-    } catch (err) {
-      this.handleShowAlertDialog({
-        title: 'Warning',
-        message: 'Unable to get search result, please try again later.'
-      });
     }
   }
 

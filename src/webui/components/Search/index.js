@@ -16,7 +16,7 @@ const Search = (props) => {
           type="text"
           placeholder={props.placeHolder}
           className={classes.searchBox}
-          onChange={props.handleSearchInput}
+          onChange={props.onChange}
           autoComplete="off"
         />
       </form>
@@ -28,7 +28,7 @@ Search.defaultProps = {
 };
 
 Search.propTypes = {
-  handleSearchInput: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   placeHolder: PropTypes.string,
 };
 

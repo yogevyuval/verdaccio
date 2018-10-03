@@ -32,3 +32,10 @@ export const InnerWrapper = styled(Toolbar)`
     `)};
   }
 `;
+
+export const LeftSide = styled(Toolbar)`
+  && {
+    display: flex;
+    flex: 1;
+  }
+`;
